@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6fbgeapl47pc"]
+
+[ext_resource type="PackedScene" uid="uid://8p20dekhaprl" path="res://ground.tscn" id="1_kk2pg"]
+[ext_resource type="PackedScene" uid="uid://dj7iclaafbwt6" path="res://rocket.tscn" id="2_vymi4"]
+[ext_resource type="PackedScene" uid="uid://ci26wqr0qombx" path="res://wall.tscn" id="4_b4bbp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3e8af"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_82u3f"]
+sky_material = SubResource("ProceduralSkyMaterial_3e8af")
+
+[sub_resource type="Environment" id="Environment_x2v3o"]
+background_mode = 2
+sky = SubResource("Sky_82u3f")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_x2v3o")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 12, 7, -1933)
+shadow_enabled = true
+
+[node name="Ground" parent="." instance=ExtResource("1_kk2pg")]
+
+[node name="Player" parent="." instance=ExtResource("2_vymi4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.29786, 0)
+
+[node name="Node3D" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, -0.343984, 11.5591, 10.1785)
+
+[node name="StaticBody3D" parent="." instance=ExtResource("4_b4bbp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.8384, 0, 0)
+
+[node name="StaticBody3D3" parent="." instance=ExtResource("4_b4bbp")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -20.8384, 0, -30)
+
+[node name="StaticBody3D4" parent="." instance=ExtResource("4_b4bbp")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -20.8384, 0, 11)
+
+[node name="StaticBody3D2" parent="." instance=ExtResource("4_b4bbp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.1616, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.570384, 0.821378, 0, -0.821378, 0.570384, 0, 65.2142, 0)
+light_energy = 50.0
+spot_range = 192.0

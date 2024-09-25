@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://dj7iclaafbwt6"]
+
+[ext_resource type="Script" path="res://rocket.gd" id="1_rc4ps"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_00ryx"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rq4vx"]
+height = 10.0
+radius = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wa47m"]
+albedo_color = Color(0.79548, 0, 0.172436, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6cr6y"]
+direction = Vector3(0, -30, 0)
+spread = 10.0
+initial_velocity_min = 33.0
+initial_velocity_max = 44.0
+linear_accel_min = -2.23517e-06
+linear_accel_max = -2.23517e-06
+
+[sub_resource type="SphereMesh" id="SphereMesh_tmsqd"]
+
+[sub_resource type="Skin" id="Skin_h23ha"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gm8us"]
+albedo_color = Color(0.572566, 0, 0.213655, 1)
+
+[node name="CharacterBody3D" type="RigidBody3D"]
+axis_lock_angular_y = true
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_00ryx")
+script = ExtResource("1_rc4ps")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_rq4vx")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+radius = 2.0
+height = 10.0
+sides = 24
+material = SubResource("StandardMaterial3D_wa47m")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.38004, 0)
+emitting = false
+lifetime = 0.2
+process_material = SubResource("ParticleProcessMaterial_6cr6y")
+draw_pass_1 = SubResource("SphereMesh_tmsqd")
+draw_skin = SubResource("Skin_h23ha")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.67112, 0)
+radius = 2.0
+height = 3.35116
+sides = 24
+cone = true
+material = SubResource("StandardMaterial3D_gm8us")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.81086, 0)
+radius = 2.0
+cone = true
